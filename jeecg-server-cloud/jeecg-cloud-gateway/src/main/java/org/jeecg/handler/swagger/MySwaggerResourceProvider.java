@@ -46,7 +46,7 @@ public class MySwaggerResourceProvider implements SwaggerResourcesProvider {
      */
     @Value("${spring.cloud.nacos.discovery.namespace:#{null}}")
     private String namespace;
-    
+
     /**
      * Swagger中需要排除的服务
      */
@@ -116,8 +116,8 @@ public class MySwaggerResourceProvider implements SwaggerResourcesProvider {
                 properties.setProperty("namespace",namespace);
             }
             NamingService naming = NamingFactory.createNamingService(properties);
-            
-            List<Instance> list = naming.selectInstances(routeId, true);
+
+            List<Instance> list = naming.selectInstances(routeId.split("\\_")[1], true);
             if (ObjectUtil.isNotEmpty(list)) {
                 hasRoute = true;
             }
